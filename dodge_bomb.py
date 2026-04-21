@@ -3,17 +3,23 @@ import sys
 import pygame as pg
 
 
-WIDTH, HEIGHT = 1100, 650
+WIDTH, HEIGHT = 1100, 650  # 幅1100, 高さ650
+DELTA = {
+    pg.K_UP:(0, -5),  # 上
+    pg.K_DOWN:(0, +5),  # 下
+    pg.K_LEFT:(-5, 0),  # 左
+    pg.K_RIGHT:(+5, 0)  # 右
+}  # 練習1
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
-    bg_img = pg.image.load("fig/pg_bg.jpg")    
+    bg_img = pg.image.load("fig/pg_bg.jpg")  # 背景画像
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
     kk_rct = kk_img.get_rect()
-    kk_rct.center = 300, 200
+    kk_rct.center = 300, 200  # 初期座標300, 200
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -24,14 +30,19 @@ def main():
 
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
-        if key_lst[pg.K_UP]:
-            sum_mv[1] -= 5
-        if key_lst[pg.K_DOWN]:
-            sum_mv[1] += 5
-        if key_lst[pg.K_LEFT]:
-            sum_mv[0] -= 5
-        if key_lst[pg.K_RIGHT]:
-            sum_mv[0] += 5
+#        if key_lst[pg.K_UP]:
+#            sum_mv[1] -= 5
+#        if key_lst[pg.K_DOWN]:
+#            sum_mv[1] += 5
+#        if key_lst[pg.K_LEFT]:
+#            sum_mv[0] -= 5
+#        if key_lst[pg.K_RIGHT]:
+#            sum_mv[0] += 5
+        for key, mv in DELTA.items():  # mvはタプル
+            if key_lst[key]:
+                sum_mv[0] += mv[0]  # 横
+                sum_mv[1] += mv[1]  # 縦
+
         kk_rct.move_ip(sum_mv)
         screen.blit(kk_img, kk_rct)
         pg.display.update()
