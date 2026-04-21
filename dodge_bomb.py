@@ -1,8 +1,8 @@
 import os
-import sys
-import random
-import time
 import pygame as pg
+import random
+import sys
+import time
 
 
 WIDTH, HEIGHT = 1100, 650  # 幅1100, 高さ650
