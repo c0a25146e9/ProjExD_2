@@ -30,6 +30,7 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
 
 
 def gameover(screen: pg.Surface) -> None:
+    """ゲームオーバーに関する関数"""
     # 1-1 黒い矩形を描画
     go_img = pg.Surface((WIDTH, HEIGHT))
     go_img.fill((0, 0, 0))
